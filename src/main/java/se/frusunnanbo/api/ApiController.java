@@ -8,6 +8,7 @@ import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import static java.util.stream.Collectors.toList;
 
@@ -25,9 +26,9 @@ public class ApiController {
     );
 
     @RequestMapping("/stuff")
-    public Collection<Stuff> stuff(@RequestParam String filter) {
+    public Collection<Stuff> stuff(@RequestParam Optional<String> filter) {
         return stuffs.stream()
-                .filter(stuff -> stuff.a.contains(filter))
+                .filter(stuff -> stuff.a.contains(filter.orElse("")))
                 .collect(toList());
     }
 
