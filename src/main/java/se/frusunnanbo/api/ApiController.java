@@ -4,7 +4,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -16,31 +15,34 @@ import static java.util.stream.Collectors.toList;
 public class ApiController {
 
     private final List<Stuff> stuffs = Arrays.asList(
-            new Stuff("cat", 9),
-            new Stuff("dog", 8),
-            new Stuff("hedgehog", 76),
-            new Stuff("dragon", 93),
-            new Stuff("beaver", 73),
-            new Stuff("tiger", 23),
-            new Stuff("lion", 65)
+            new Stuff("Hufflepuff", "cat", 9),
+            new Stuff("Taco", "dog", 8),
+            new Stuff("Spiky", "hedgehog", 7),
+            new Stuff("Joy", "hedgehog", 4),
+            new Stuff("Smaug", "dragon", 93),
+            new Stuff("Betty", "beaver", 23),
+            new Stuff("Stripey McBitealot", "tiger", 17),
+            new Stuff("Tigger Longwhiskers", "tiger", 10),
+            new Stuff("Simba", "lion", 4)
     );
 
     @RequestMapping("/stuff")
     public Collection<Stuff> stuff(@RequestParam Optional<String> filter) {
+        System.out.println("Got request for /stuff");
         return stuffs.stream()
-                .filter(stuff -> stuff.a.contains(filter.orElse("")))
+                .filter(stuff -> stuff.kind.contains(filter.orElse("")))
                 .collect(toList());
     }
 
     private static class Stuff {
-        public final OffsetDateTime createdAt;
-        public final String a;
-        public final int b;
+        public final String name;
+        public final String kind;
+        public final int age;
 
-        private Stuff(String a, int b) {
-            this.createdAt = OffsetDateTime.now();
-            this.a = a;
-            this.b = b;
+        private Stuff(String name, String kind, int age) {
+            this.name = name;
+            this.kind = kind;
+            this.age = age;
         }
     }
 
