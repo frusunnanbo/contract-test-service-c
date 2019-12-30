@@ -1,0 +1,51 @@
+{
+  "consumer": {
+    "name": "Animal Visualiser"
+  },
+  "provider": {
+    "name": "Animal API"
+  },
+  "interactions": [
+    {
+      "description": "a request for animals",
+      "request": {
+        "method": "GET",
+        "path": "/stuff"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": [
+          {
+            "name": "Joy",
+            "kind": "hedgehog"
+          },
+          {
+            "name": "Joy",
+            "kind": "hedgehog"
+          },
+          {
+            "name": "Joy",
+            "kind": "hedgehog"
+          }
+        ],
+        "matchingRules": {
+          "$.body": {
+            "min": 3
+          },
+          "$.body[*].*": {
+            "match": "type"
+          }
+        }
+      },
+      "metadata": null
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "2.0.0"
+    }
+  }
+}

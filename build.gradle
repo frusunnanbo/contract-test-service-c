@@ -1,7 +1,18 @@
+buildscript {
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("au.com.dius:pact-jvm-provider-gradle:4.0.3")
+	}
+}
+
 plugins {
 	id 'org.springframework.boot' version '2.2.2.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
 	id 'java'
+	id 'au.com.dius.pact' version "4.0.4"
+
 }
 
 group = 'se.frusunnanbo'
@@ -21,4 +32,23 @@ dependencies {
 
 test {
 	useJUnitPlatform()
+}
+
+pact {
+	serviceProviders {
+		animal_api {
+			protocol = 'http'
+			host = 'localhost'
+			port = 8080
+			path = '/'
+
+			hasPactWith('Animal Visualizer') {
+				pactSource = file("$rootDir/pacts/animal_visualiser-animal_api.json")
+			}
+
+			// Test Pacts from Pact Broker
+			//hasPactsFromPactBroker(mybrokerUrl, authentication: ['Basic', mybrokerUser, mybrokerPassword])
+
+		}
+	}
 }
