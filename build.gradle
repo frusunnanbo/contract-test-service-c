@@ -18,7 +18,8 @@ plugins {
 
 group = 'se.frusunnanbo'
 version = '1.0.0'
-sourceCompatibility = '13'
+sourceCompatibility = 1.13
+targetCompatibility = 1.13
 
 repositories {
 	mavenCentral()
@@ -43,24 +44,20 @@ task startApplication(type: SpawnProcessTask, dependsOn: 'bootJar') {
 task killApplication(type: KillProcessTask)
 
 pact {
+
 	serviceProviders {
-		animal_api {
+		'Animal API' {
 
 			startProviderTask = startApplication
 			terminateProviderTask = killApplication
+
 
 			protocol = 'http'
 			host = 'localhost'
 			port = 8080
 			path = '/'
 
-			hasPactWith('Animal Visualizer') {
-				pactSource = file("$rootDir/pacts/animal_visualiser-animal_api.json")
-			}
-
-			// Test Pacts from Pact Broker
-			//hasPactsFromPactBroker(mybrokerUrl, authentication: ['Basic', mybrokerUser, mybrokerPassword])
-
+			hasPactsFromPactBroker('http://localhost:9292')
 		}
 	}
 }
