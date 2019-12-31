@@ -12,11 +12,12 @@ plugins {
 	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
 	id 'java'
 	id 'au.com.dius.pact' version "4.0.4"
+	id 'com.wiredforcode.spawn' version '0.7.0'
 
 }
 
 group = 'se.frusunnanbo'
-version = '0.0.1-SNAPSHOT'
+version = '1.0.0'
 sourceCompatibility = '13'
 
 repositories {
@@ -34,9 +35,20 @@ test {
 	useJUnitPlatform()
 }
 
+task startApplication(type: SpawnProcessTask, dependsOn: 'bootJar') {
+	command "java -jar $buildDir/libs/${jar.archiveFileName.get()}"
+    ready 'Tomcat started on port(s):'
+}
+
+task killApplication(type: KillProcessTask)
+
 pact {
 	serviceProviders {
 		animal_api {
+
+			startProviderTask = startApplication
+			terminateProviderTask = killApplication
+
 			protocol = 'http'
 			host = 'localhost'
 			port = 8080
