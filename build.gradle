@@ -43,21 +43,21 @@ task startApplication(type: SpawnProcessTask, dependsOn: 'bootJar') {
 
 task killApplication(type: KillProcessTask)
 
-pact {
-
-	serviceProviders {
-		'Animal API' {
-
-			startProviderTask = startApplication
-			terminateProviderTask = killApplication
-
-
-			protocol = 'http'
-			host = 'localhost'
-			port = 8080
-			path = '/'
-
-			hasPactsFromPactBroker('http://localhost:9292')
-		}
-	}
-}
+//pact {
+//
+//	serviceProviders {
+//		'Animal API' {
+//
+//			startProviderTask = startApplication
+//			terminateProviderTask = killApplication
+//
+//
+//			protocol = 'http'
+//			host = 'localhost'
+//			port = 8080
+//			path = '/'
+//
+//			hasPactsFromPactBroker('http://localhost:9292')
+//		}
+//	}
+//}
