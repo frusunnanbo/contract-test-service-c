@@ -34,14 +34,6 @@ public class ApiController {
                 .collect(toList());
     }
 
-    @RequestMapping("/stuff")
-    public Collection<Stuff> stuff(@RequestParam Optional<String> filter) {
-        System.out.println("Got request for /stuff");
-        return stuffs.stream()
-                .filter(stuff -> stuff.kind.contains(filter.orElse("")))
-                .collect(toList());
-    }
-
     private static class Stuff {
         public final String name;
         public final String kind;
