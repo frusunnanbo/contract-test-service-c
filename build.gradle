@@ -43,6 +43,9 @@ task startApplication(type: SpawnProcessTask, dependsOn: 'bootJar') {
 
 task killApplication(type: KillProcessTask)
 
+def pactBrokerToken = pactBrokerToken ?: System.getenv('PACT_BROKER_TOKEN')
+def pactBrokerUrl = 'https://frusunnanbo.pact.dius.com.au'
+
 pact {
 
 	serviceProviders {
@@ -57,7 +60,8 @@ pact {
 			port = 8080
 			path = '/'
 
-			hasPactsFromPactBroker('http://localhost:9292', authentication: ['Bearer', System.getenv('PACT_BROKER_TOKEN')])
+			hasPactsFromPactBroker(pactBrokerUrl, authentication: ['Bearer', pactBrokerToken])
 		}
 	}
+
 }
