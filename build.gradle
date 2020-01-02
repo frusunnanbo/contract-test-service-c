@@ -43,7 +43,7 @@ task startApplication(type: SpawnProcessTask, dependsOn: 'bootJar') {
 
 task killApplication(type: KillProcessTask)
 
-def pactBrokerToken = pactBrokerToken ?: System.getenv('PACT_BROKER_TOKEN')
+def pactBrokerToken = Project.hasProperty('pactBrokerToken') ? pactBrokerToken : System.getenv('PACT_BROKER_TOKEN')
 def pactBrokerUrl = 'https://frusunnanbo.pact.dius.com.au'
 
 pact {
