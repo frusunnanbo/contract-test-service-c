@@ -21,7 +21,7 @@ def currentGitHash() {
 }
 
 group = 'se.frusunnanbo'
-version = "1.0.0-${currentGitHash()}"
+version = "1.0.0-${currentGitHash()}".toString()
 sourceCompatibility = 1.13
 targetCompatibility = 1.13
 
