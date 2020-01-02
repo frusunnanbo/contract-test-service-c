@@ -16,8 +16,12 @@ plugins {
 
 }
 
+def currentGitHash() {
+	'git rev-parse --verify --short HEAD'.execute().text.trim()
+}
+
 group = 'se.frusunnanbo'
-version = '1.0.0'
+version = "1.0.0-${currentGitHash()}"
 sourceCompatibility = 1.13
 targetCompatibility = 1.13
 
@@ -53,7 +57,6 @@ pact {
 
 			startProviderTask = startApplication
 			terminateProviderTask = killApplication
-
 
 			protocol = 'http'
 			host = 'localhost'
