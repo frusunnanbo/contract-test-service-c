@@ -38,6 +38,7 @@ public class AnimalController {
         public final String name;
         public final String kind;
         public final int age;
+        public final Image image;
         public final String funFact;
         public final FoodSchedule foodSchedule;
 
@@ -45,8 +46,23 @@ public class AnimalController {
             this.name = name;
             this.kind = kind;
             this.age = age;
+            this.image = imageFor(name);
             this.funFact = funFact;
             this.foodSchedule = foodSchedule;
+        }
+
+        private Image imageFor(String name) {
+            return new Image("/images/" + name.toLowerCase() + ".jpg", "/images/" + name.toLowerCase() + "-attribution.jpg");
+        }
+    }
+
+    private static class Image {
+        public final String path;
+        public final String attribution;
+
+        private Image(String path, String attribution) {
+            this.path = path;
+            this.attribution = attribution;
         }
     }
 
