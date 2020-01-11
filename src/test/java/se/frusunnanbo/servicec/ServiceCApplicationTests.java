@@ -1,10 +1,10 @@
-package se.frusunnanbo.api;
+package se.frusunnanbo.servicec;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ApiApplicationTests {
+class ServiceCApplicationTests {
 
 	@Test
 	void contextLoads() {

@@ -1,4 +1,4 @@
-package se.frusunnanbo.api;
+package se.frusunnanbo.servicec;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,7 +12,7 @@ import java.util.Optional;
 import static java.util.stream.Collectors.toList;
 
 @RestController
-public class ApiController {
+public class AnimalController {
 
     private final List<Stuff> stuffs = Arrays.asList(
             new Stuff("Hufflepuff", "cat", 9),
