@@ -22,8 +22,11 @@ def currentGitHash() {
 
 group = 'se.frusunnanbo'
 version = "1.0.0-${currentGitHash()}".toString()
-sourceCompatibility = 1.13
-targetCompatibility = 1.13
+
+java {
+	sourceCompatibility = JavaVersion.VERSION_13
+	targetCompatibility = JavaVersion.VERSION_13
+}
 
 repositories {
 	mavenCentral()
@@ -53,7 +56,7 @@ def pactBrokerUrl = 'https://frusunnanbo.pact.dius.com.au'
 pact {
 
 	serviceProviders {
-		'Animal API' {
+		'Service C' {
 
 			startProviderTask = startApplication
 			terminateProviderTask = killApplication
@@ -63,7 +66,10 @@ pact {
 			port = 8080
 			path = '/'
 
-			hasPactsFromPactBroker(pactBrokerUrl, authentication: ['Bearer', pactBrokerToken])
+			hasPactsFromPactBroker(pactBrokerUrl, authentication: ['Bearer', pactBrokerToken]) {
+				stateChangeUrl = url('http://localhost:8080/pactStateChange')
+				stateChangeUsesBody = true
+			}
 		}
 	}
 
