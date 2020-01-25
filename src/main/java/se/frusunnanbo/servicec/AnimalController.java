@@ -34,8 +34,16 @@ public class AnimalController {
                 TIGGER);
     }
 
-    @RequestMapping("/animals")
+    @RequestMapping("/")
     public Collection<Animal> animals(@RequestParam Optional<String> kind) {
+        logger.info("Got request for /");
+        return repository.getAll().stream()
+                .filter(animal -> animal.kind.contains(kind.orElse("")))
+                .collect(toList());
+    }
+
+    @RequestMapping("/animals")
+    public Collection<Animal> animalsOld(@RequestParam Optional<String> kind) {
         logger.info("Got request for /animals");
         return repository.getAll().stream()
                 .filter(animal -> animal.kind.contains(kind.orElse("")))
