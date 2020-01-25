@@ -1,8 +1,23 @@
 package se.frusunnanbo.servicec;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Objects;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 class Animal {
+
+    private final static Logger logger = LoggerFactory.getLogger(Animal.class);
+
     public final String name;
     public final String kind;
     public final String description;
@@ -49,7 +64,30 @@ class Animal {
     }
 
     private Image imageFor(String name) {
-        return new Image("/images/" + name.toLowerCase() + ".jpg", "/images/" + name.toLowerCase() + "-attribution.txt");
+        return new Image(
+                "/images/" + name.toLowerCase() + ".jpg",
+                attributionFor(name));
+    }
+
+    private String attributionFor(String name) {
+            final URL resource = getClass().getClassLoader()
+                    .getResource("static/images/" + name.toLowerCase() + "-attribution.txt");
+            return Optional.ofNullable(resource).map(r -> resourceContents(resource)).orElse("No attribution found " + resource);
+    }
+
+    private String resourceContents(URL resource) {
+        try {
+            Path path = Paths.get(resource.toURI());
+            try (Stream<String> lines = Files.lines(path)) {
+                return lines.collect(Collectors.joining("\n"));
+            } catch (IOException e) {
+                logger.error("Error when reading attribution for {}", resource, e);
+                return "Error when reading attribution for " + resource;
+            }
+        } catch (URISyntaxException e) {
+            logger.error("Error when getting attribution for {}", resource, e);
+            return "Invalid URI " + resource;
+        }
     }
 
     private static class Image {
