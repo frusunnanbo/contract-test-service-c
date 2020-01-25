@@ -5,13 +5,15 @@ import java.util.Objects;
 class Animal {
     public final String name;
     public final String kind;
+    public final String description;
     public final int age;
     public final Image image;
     public final FoodSchedule foodSchedule;
 
-    Animal(String name, String kind, int age, FoodSchedule foodSchedule) {
+    Animal(String name, String kind, String description, int age, FoodSchedule foodSchedule) {
         this.name = name;
         this.kind = kind;
+        this.description = description;
         this.age = age;
         this.image = imageFor(name);
         this.foodSchedule = foodSchedule;
