@@ -19,15 +19,15 @@ public class AnimalController {
     Logger logger = LoggerFactory.getLogger(AnimalController.class);
 
     private final List<Animal> animals = Arrays.asList(
-            new Animal("Hufflepuff", "cat", 9, "Only awake at night", new Animal.FoodSchedule("Nothing", "Nothing", "Steak")),
-            new Animal("Taco", "dog", 8, "Loves bathing", new Animal.FoodSchedule("Nothing", "Nothing", "Steak")),
-            new Animal("Spiky", "hedgehog", 7, "Absolutely hates milk", new Animal.FoodSchedule("Nothing", "Nothing", "Steak")),
-            new Animal("Joy", "hedgehog", 4, "Eats snails", new Animal.FoodSchedule("Nothing", "Nothing", "Steak")),
-            new Animal("Smaug", "dragon", 93, "Loves to be schratched on his belly", new Animal.FoodSchedule("Nothing", "Nothing", "Steak")),
-            new Animal("Betty", "beaver", 23, "Hides for strangers", new Animal.FoodSchedule("Nothing", "Nothing", "Steak")),
-            new Animal("Stripey McBitealot", "tiger", 17, "Probably the world's only vegetarian tiger", new Animal.FoodSchedule("Nothing", "Nothing", "Steak")),
-            new Animal("Tigger Longwhiskers", "tiger", 10, "Born and bred in New York", new Animal.FoodSchedule("Nothing", "Nothing", "Steak")),
-            new Animal("Simba", "lion", 4, "Loves biting little girls", new Animal.FoodSchedule("Nothing", "Nothing", "Steak"))
+            Animals.HUFFLEPUFF,
+            Animals.TACO,
+            Animals.SPIKY,
+            Animals.JOY,
+            Animals.SMAUG,
+            Animals.BETTY,
+            Animals.STRIPEY,
+            Animals.TIGGER,
+            Animals.SIMBA
     );
 
     @RequestMapping("/animals")
