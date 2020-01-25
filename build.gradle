@@ -16,7 +16,7 @@ plugins {
 
 }
 
-def currentGitHash() {
+static def currentGitHash() {
 	'git rev-parse --verify --short HEAD'.execute().text.trim()
 }
 
