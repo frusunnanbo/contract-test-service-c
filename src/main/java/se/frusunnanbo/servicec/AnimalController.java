@@ -10,14 +10,11 @@ import java.util.Collection;
 import java.util.Optional;
 
 import static java.util.stream.Collectors.toList;
-import static se.frusunnanbo.servicec.Animals.BETTY;
 import static se.frusunnanbo.servicec.Animals.HUFFLEPUFF;
 import static se.frusunnanbo.servicec.Animals.JOY;
-import static se.frusunnanbo.servicec.Animals.SIMBA;
 import static se.frusunnanbo.servicec.Animals.SMAUG;
 import static se.frusunnanbo.servicec.Animals.SPIKY;
 import static se.frusunnanbo.servicec.Animals.STRIPEY;
-import static se.frusunnanbo.servicec.Animals.TACO;
 import static se.frusunnanbo.servicec.Animals.TIGGER;
 
 @RestController
@@ -30,14 +27,11 @@ public class AnimalController {
         this.repository = repository;
         this.repository.setAnimals(
                 HUFFLEPUFF,
-                TACO,
                 SPIKY,
                 JOY,
                 SMAUG,
-                BETTY,
                 STRIPEY,
-                TIGGER,
-                SIMBA);
+                TIGGER);
     }
 
     @RequestMapping("/animals")

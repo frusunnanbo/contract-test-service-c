@@ -7,15 +7,13 @@ class Animal {
     public final String kind;
     public final int age;
     public final Image image;
-    public final String funFact;
     public final FoodSchedule foodSchedule;
 
-    Animal(String name, String kind, int age, String funFact, FoodSchedule foodSchedule) {
+    Animal(String name, String kind, int age, FoodSchedule foodSchedule) {
         this.name = name;
         this.kind = kind;
         this.age = age;
         this.image = imageFor(name);
-        this.funFact = funFact;
         this.foodSchedule = foodSchedule;
     }
 
@@ -36,7 +34,6 @@ class Animal {
             Animal other = (Animal) o;
             return Objects.equals(this.age, other.age)
                     && Objects.equals(this.foodSchedule, other.foodSchedule)
-                    && Objects.equals(this.funFact, other.funFact)
                     && Objects.equals(this.image, other.image)
                     && Objects.equals(this.kind, other.kind)
                     && Objects.equals(this.name, other.name);
@@ -46,11 +43,11 @@ class Animal {
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, kind, age, image, funFact, foodSchedule);
+        return Objects.hash(name, kind, age, image, foodSchedule);
     }
 
     private Image imageFor(String name) {
-        return new Image("/images/" + name.toLowerCase() + ".jpg", "/images/" + name.toLowerCase() + "-attribution.jpg");
+        return new Image("/images/" + name.toLowerCase() + ".jpg", "/images/" + name.toLowerCase() + "-attribution.txt");
     }
 
     private static class Image {
