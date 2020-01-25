@@ -1,5 +1,7 @@
 package se.frusunnanbo.servicec;
 
+import java.util.Objects;
+
 class Animal {
     public final String name;
     public final String kind;
@@ -15,6 +17,36 @@ class Animal {
         this.image = imageFor(name);
         this.funFact = funFact;
         this.foodSchedule = foodSchedule;
+    }
+
+    @Override
+    public String toString() {
+        return "Animal{" +
+                "name='" + name + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (o instanceof Animal) {
+            Animal other = (Animal) o;
+            return Objects.equals(this.age, other.age)
+                    && Objects.equals(this.foodSchedule, other.foodSchedule)
+                    && Objects.equals(this.funFact, other.funFact)
+                    && Objects.equals(this.image, other.image)
+                    && Objects.equals(this.kind, other.kind)
+                    && Objects.equals(this.name, other.name);
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, kind, age, image, funFact, foodSchedule);
     }
 
     private Image imageFor(String name) {
