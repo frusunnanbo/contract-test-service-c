@@ -1,19 +1,7 @@
-buildscript {
-	repositories {
-		mavenCentral()
-	}
-	dependencies {
-		classpath("au.com.dius:pact-jvm-provider-gradle:4.0.3")
-	}
-}
-
 plugins {
 	id 'org.springframework.boot' version '2.2.2.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
 	id 'java'
-	id 'au.com.dius.pact' version "4.0.4"
-	id 'com.wiredforcode.spawn' version '0.7.0'
-
 }
 
 static def currentGitHash() {
@@ -42,36 +30,4 @@ dependencies {
 
 test {
 	useJUnitPlatform()
-}
-
-task startApplication(type: SpawnProcessTask, dependsOn: 'bootJar') {
-	command "java -jar $buildDir/libs/${jar.archiveFileName.get()}"
-    ready 'Tomcat started on port(s):'
-}
-
-task killApplication(type: KillProcessTask)
-
-def pactBrokerToken = Project.hasProperty('pactBrokerToken') ? pactBrokerToken : System.getenv('PACT_BROKER_TOKEN')
-def pactBrokerUrl = 'https://frusunnanbo.pact.dius.com.au'
-
-pact {
-
-	serviceProviders {
-		'Service C' {
-
-			startProviderTask = startApplication
-			terminateProviderTask = killApplication
-
-			protocol = 'http'
-			host = 'localhost'
-			port = 8080
-			path = '/'
-
-			hasPactsFromPactBroker(pactBrokerUrl, authentication: ['Bearer', pactBrokerToken]) {
-				stateChangeUrl = url('http://localhost:8080/pactStateChange')
-				stateChangeUsesBody = true
-			}
-		}
-	}
-
 }

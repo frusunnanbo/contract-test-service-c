@@ -4,7 +4,6 @@ jdk:
 
 script:
   - ./gradlew check
-  - ./gradlew pactVerify
 
 deploy:
   provider: heroku
