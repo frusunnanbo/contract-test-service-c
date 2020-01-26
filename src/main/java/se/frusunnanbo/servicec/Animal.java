@@ -1,17 +1,8 @@
 package se.frusunnanbo.servicec;
 
-import org.apache.commons.io.IOUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
 class Animal {
-
-    private final static Logger logger = LoggerFactory.getLogger(Animal.class);
 
     public final String name;
     public final String kind;
@@ -60,28 +51,14 @@ class Animal {
 
     private Image imageFor(String name) {
         return new Image(
-                "/images/" + name.toLowerCase() + ".jpg",
-                attributionFor(name));
-    }
-
-    private String attributionFor(String name) {
-        final String resourcePath = "static/images/" + name.toLowerCase() + "-attribution.txt";
-        try (final InputStream attributionStream = getClass().getClassLoader().getResourceAsStream(resourcePath)) {
-            return IOUtils.toString(attributionStream, StandardCharsets.UTF_8);
-        } catch (IOException e) {
-            logger.error("Error when reading attribution for {}'s image", name, e);
-            return "Error when reading attribution for " + name + "'s image";
-        }
-
+                "/images/" + name.toLowerCase() + ".jpg");
     }
 
     private static class Image {
         public final String path;
-        public final String attribution;
 
-        private Image(String path, String attribution) {
+        private Image(String path) {
             this.path = path;
-            this.attribution = attribution;
         }
     }
 
