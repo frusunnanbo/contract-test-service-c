@@ -1,18 +1,13 @@
 package se.frusunnanbo.servicec;
 
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Objects;
-import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 class Animal {
 
@@ -70,24 +65,14 @@ class Animal {
     }
 
     private String attributionFor(String name) {
-            final URL resource = getClass().getClassLoader()
-                    .getResource("static/images/" + name.toLowerCase() + "-attribution.txt");
-            return Optional.ofNullable(resource).map(r -> resourceContents(resource)).orElse("No attribution found " + resource);
-    }
-
-    private String resourceContents(URL resource) {
-        try {
-            Path path = Paths.get(resource.toURI());
-            try (Stream<String> lines = Files.lines(path)) {
-                return lines.collect(Collectors.joining("\n"));
-            } catch (IOException e) {
-                logger.error("Error when reading attribution for {}", resource, e);
-                return "Error when reading attribution for " + resource;
-            }
-        } catch (URISyntaxException e) {
-            logger.error("Error when getting attribution for {}", resource, e);
-            return "Invalid URI " + resource;
+        final String resourcePath = "static/images/" + name.toLowerCase() + "-attribution.txt";
+        try (final InputStream attributionStream = getClass().getClassLoader().getResourceAsStream(resourcePath)) {
+            return IOUtils.toString(attributionStream, StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            logger.error("Error when reading attribution for {}'s image", name, e);
+            return "Error when reading attribution for " + name + "'s image";
         }
+
     }
 
     private static class Image {
