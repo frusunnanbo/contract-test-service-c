@@ -28,4 +28,17 @@ public class ServiceAContractTest {
                 .andExpect(jsonPath("$[0].description").isString())
                 .andExpect(jsonPath("$[0].age").isNumber());
     }
+
+    @Test
+    public void should_filter_animals_by_kind() throws Exception {
+        this.mockMvc.perform(get("/?kind=hedgehog"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isArray())
+                .andExpect(jsonPath("$").isNotEmpty())
+                .andExpect(jsonPath("$[0]").isMap())
+                .andExpect(jsonPath("$[0].kind").value("hedgehog"))
+                .andExpect(jsonPath("$[1]").isMap())
+                .andExpect(jsonPath("$[1].kind").value("hedgehog"))
+                .andExpect(jsonPath("$[2]").doesNotExist());
+    }
 }
