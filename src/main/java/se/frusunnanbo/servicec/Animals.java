@@ -18,10 +18,10 @@ public class Animals {
     private static final String STRIPEY_DESCRIPTION = "Stripey is the cuddliest tiger you can ever imagine.";
     private static final String TIGGER_DESCRIPTION = "Tigger is our newest aquisition. He's about as beautiful and dangerous as a tiger can be.";
 
-    static final Animal HUFFLEPUFF = new Animal("Hufflepuff", "cat", HUFFLEPUFF_DESCRIPTION, 9, CAT_FOODSCHEDULE);
-    static final Animal SPIKY = new Animal("Spiky", "hedgehog", SPIKY_DESCRIPTION, 7, HEDGEHOG_FOODSCHEDULE);
-    static final Animal JOY = new Animal("Joy", "hedgehog", JOY_DESCRIPTION, 4, HEDGEHOG_FOODSCHEDULE);
-    static final Animal SMAUG = new Animal("Smaug", "dragon", SMAUG_DESCRIPTION, 93, DRAGON_FOODSCHEDULE);
-    static final Animal STRIPEY = new Animal("Stripey", "tiger", STRIPEY_DESCRIPTION, 17, TIGER_FOODSCHEDULE);
-    static final Animal TIGGER = new Animal("Tigger", "tiger", TIGGER_DESCRIPTION, 10, TIGER_FOODSCHEDULE);
+    public static final Animal HUFFLEPUFF = new Animal("Hufflepuff", "cat", HUFFLEPUFF_DESCRIPTION, 9, CAT_FOODSCHEDULE);
+    public static final Animal SPIKY = new Animal("Spiky", "hedgehog", SPIKY_DESCRIPTION, 7, HEDGEHOG_FOODSCHEDULE);
+    public static final Animal JOY = new Animal("Joy", "hedgehog", JOY_DESCRIPTION, 4, HEDGEHOG_FOODSCHEDULE);
+    public static final Animal SMAUG = new Animal("Smaug", "dragon", SMAUG_DESCRIPTION, 93, DRAGON_FOODSCHEDULE);
+    public static final Animal STRIPEY = new Animal("Stripey", "tiger", STRIPEY_DESCRIPTION, 17, TIGER_FOODSCHEDULE);
+    public static final Animal TIGGER = new Animal("Tigger", "tiger", TIGGER_DESCRIPTION, 10, TIGER_FOODSCHEDULE);
 }
