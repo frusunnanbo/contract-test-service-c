@@ -1,0 +1,82 @@
+{
+  "consumer": {
+    "name": "Service B"
+  },
+  "provider": {
+    "name": "Service C"
+  },
+  "interactions": [
+    {
+      "description": "a request for animals",
+      "providerState": "there are >= 3 animals",
+      "request": {
+        "method": "GET",
+        "path": "/"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": [
+          {
+            "name": "Hufflepuff",
+            "image": {
+              "path": "/path/to/image"
+            },
+            "foodSchedule": {
+              "morning": "some insects",
+              "lunch": "worms!",
+              "evening": "snails"
+            }
+          },
+          {
+            "name": "Hufflepuff",
+            "image": {
+              "path": "/path/to/image"
+            },
+            "foodSchedule": {
+              "morning": "some insects",
+              "lunch": "worms!",
+              "evening": "snails"
+            }
+          },
+          {
+            "name": "Hufflepuff",
+            "image": {
+              "path": "/path/to/image"
+            },
+            "foodSchedule": {
+              "morning": "some insects",
+              "lunch": "worms!",
+              "evening": "snails"
+            }
+          }
+        ],
+        "matchingRules": {
+          "$.body": {
+            "min": 3
+          },
+          "$.body[*].*": {
+            "match": "type"
+          },
+          "$.body[*].name": {
+            "match": "type"
+          },
+          "$.body[*].image.path": {
+            "match": "type"
+          },
+          "$.body[*].foodSchedule": {
+            "match": "type"
+          }
+        }
+      },
+      "metadata": null
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "2.0.0"
+    }
+  }
+}
