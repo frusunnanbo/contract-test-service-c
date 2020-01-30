@@ -31,7 +31,7 @@ public class PactStateController {
             logger.info("3 animals");
             animalRepository.setAnimals(STRIPEY, SMAUG, HUFFLEPUFF);
         } else if ("there are 2 hedgehogs and 1 cat".equals(state.state)) {
-            logger.info("3 animals");
+            logger.info("Two hedgehogs, one cat");
             animalRepository.setAnimals(SPIKY, HUFFLEPUFF, JOY);
         }
 
