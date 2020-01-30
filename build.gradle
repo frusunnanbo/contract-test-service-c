@@ -50,6 +50,9 @@ task startApplication(type: SpawnProcessTask, dependsOn: 'bootJar') {
 
 task killApplication(type: KillProcessTask)
 
+def pactBrokerToken = Project.hasProperty('pactBrokerToken') ? pactBrokerToken : System.getenv('PACT_BROKER_TOKEN')
+def pactBrokerUrl = 'https://frusunnanbo.pact.dius.com.au'
+
 pact {
 
 	serviceProviders {
@@ -63,10 +66,9 @@ pact {
 			port = 8081
 			path = '/'
 
-			hasPactsWith('my consumers') {
+			hasPactsFromPactBroker(pactBrokerUrl, authentication: ['Bearer', pactBrokerToken]) {
 				stateChangeUrl = url('http://localhost:8080/pactStateChange')
 				stateChangeUsesBody = true
-				pactFileLocation = file('pacts')
 			}
 		}
 	}
