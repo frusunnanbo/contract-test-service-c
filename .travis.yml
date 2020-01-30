@@ -4,8 +4,11 @@ jdk:
 
 script:
   - ./gradlew check
+  - ./gradlew pactVerify
 
 deploy:
+  on:
+    all_branches: true
   provider: heroku
   app: contract-test-service-c
   api_key:
