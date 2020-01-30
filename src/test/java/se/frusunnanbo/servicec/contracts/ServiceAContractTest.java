@@ -30,9 +30,12 @@ public class ServiceAContractTest {
 
     @Test
     public void should_return_expected_json_format() throws Exception {
+        // Provider state
         given(animalRespository.getAll()).willReturn(List.of(HUFFLEPUFF));
 
+        // I will send...
         this.mockMvc.perform(get("/"))
+                // I expect this in response
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isArray())
                 .andExpect(jsonPath("$").isNotEmpty())
@@ -44,9 +47,12 @@ public class ServiceAContractTest {
 
     @Test
     public void should_filter_animals_by_kind() throws Exception {
+        // Provider state
         given(animalRespository.getAll()).willReturn(List.of(SPIKY, HUFFLEPUFF, JOY));
 
+        // I will send...
         this.mockMvc.perform(get("/?kind=hedgehog"))
+                // I expect this in response
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isArray())
                 .andExpect(jsonPath("$").isNotEmpty())

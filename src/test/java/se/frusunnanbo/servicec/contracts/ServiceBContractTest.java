@@ -28,9 +28,12 @@ public class ServiceBContractTest {
 
     @Test
     public void should_return_expected_json_format() throws Exception {
+        // Provider state
         given(animalRespository.getAll()).willReturn(List.of(HUFFLEPUFF));
 
+        // I will send...
         this.mockMvc.perform(get("/"))
+                // I expect this in response
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isArray())
                 .andExpect(jsonPath("$").isNotEmpty())
