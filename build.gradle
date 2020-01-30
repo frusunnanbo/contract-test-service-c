@@ -64,9 +64,9 @@ pact {
 			path = '/'
 
 			hasPactsWith('my consumers') {
-
+				stateChangeUrl = url('http://localhost:8080/pactStateChange')
+				stateChangeUsesBody = true
 				pactFileLocation = file('pacts')
-
 			}
 		}
 	}
