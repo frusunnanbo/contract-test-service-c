@@ -44,7 +44,7 @@ test {
 }
 
 task startApplication(type: SpawnProcessTask, dependsOn: 'bootJar') {
-	command "java -jar $buildDir/libs/${jar.archiveFileName.get()}"
+	command "java -jar -Dserver.port=8081 $buildDir/libs/${jar.archiveFileName.get()} "
 	ready 'Tomcat started on port(s):'
 }
 
@@ -60,7 +60,7 @@ pact {
 
 			protocol = 'http'
 			host = 'localhost'
-			port = 8080
+			port = 8081
 			path = '/'
 
 			hasPactsWith('my consumers') {
