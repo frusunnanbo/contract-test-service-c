@@ -67,7 +67,7 @@ pact {
 			path = '/'
 
 			hasPactsFromPactBroker(pactBrokerUrl, authentication: ['Bearer', pactBrokerToken]) {
-				stateChangeUrl = url('http://localhost:8080/pactStateChange')
+				stateChangeUrl = url('http://localhost:8081/pactStateChange')
 				stateChangeUsesBody = true
 			}
 		}
