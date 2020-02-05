@@ -8,6 +8,7 @@ class Animal {
     public final String kind;
     public final String description;
     public final int age;
+    public final String imagePath;
     public final Image image;
     public final FoodSchedule foodSchedule;
 
@@ -16,6 +17,7 @@ class Animal {
         this.kind = kind;
         this.description = description;
         this.age = age;
+        this.imagePath = imagePathFor(name);
         this.image = imageFor(name);
         this.foodSchedule = foodSchedule;
     }
@@ -50,8 +52,11 @@ class Animal {
     }
 
     private Image imageFor(String name) {
-        return new Image(
-                "/images/" + name.toLowerCase() + ".jpg");
+        return new Image(imagePathFor(name));
+    }
+
+    private String imagePathFor(String name) {
+        return "/images/" + name.toLowerCase() + ".jpg";
     }
 
     private static class Image {
